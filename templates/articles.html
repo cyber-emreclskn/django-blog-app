@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+            <h3>Makaleler</h3>
+            <hr>
+        </div>
+    </div>
+</div>
+<div class ="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+            <form>
+                 {% csrf_token %} 
+                <input type="text" name = "keyword" class="input-sm" maxlength="64" placeholder="Ara...">
+              <button type="submit" class="btn btn-danger">Ara</button>
+            </form>
+      </div>
+    </div>
+
+</div>
+
+{% if articles %}
+{% for article in articles %}
+<!-- Page Content -->
+
+
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+            <!-- Title -->
+            <a href="{% url 'article:detail' article.id %}">
+                <h1 class="mt-4">{{article.title}}</h1>
+            </a>
+
+            <!-- Author -->
+            <p class="lead">
+
+                <a href="#">{{article.author}}</a> tarafından yayınlandı
+            </p>
+
+            <hr>
+
+            <!-- Date/Time -->
+            <p>Posted on {{article.created_date}}</p>
+
+            <hr>
+            <!-- Preview Image -->
+            {% if article.article_image %}
+            <a href="{% url 'article:detail' article.id %}"><img class="img-fluid rounded"
+                    src="{{article.article_image.url}}" alt=""></a>
+            {% endif %}
+            <hr>
+
+            <p>{{article.content|safe|truncatewords:50}}</p>
+            <a style="float: right;" href="{% url 'article:detail' article.id %}" class="btn btn-danger">Devamını
+                Oku</a>
+            <hr>
+
+        </div>
+    </div>
+
+</div>
+<!-- /.row -->
+{% endfor %}
+
+
+{% else %}
+<div class="alert alert-danger">
+    Makale Bulunamadı
+</div>
+
+{% endif %}
+
+
+{% endblock body %}
