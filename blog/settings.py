@@ -25,7 +25,7 @@ SECRET_KEY = '1vzfr5w+f%j(jr%219$sx1e#-0c#htj@!auum=rcwrui5*w_1e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['deneme-heroku-1.herokuapp.com','127.0.0.1']
 
 
 # Application definition
